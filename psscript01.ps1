@@ -34,7 +34,7 @@ WindowsServerCommon
 InstallCloudLabsShadow $ODLID $InstallCloudLabsShadow
 CreateCredFile $AzureUserName $AzurePassword $AzureTenantID $AzureSubscriptionID $DeploymentID $azuserobjectid
 
-choco install dotnetcore-sdk
+#choco install dotnetcore-sdk
 choco install azure-functions-core-tools
 InstallAzCLI
 
@@ -43,7 +43,7 @@ sleep 10
 
 
 #Assign Packages to Install
-choco install vscode
+#choco install vscode
 choco install git
 
 
