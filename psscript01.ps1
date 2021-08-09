@@ -121,7 +121,7 @@ $wclient.DownloadFile($url, $output)
  
 
 Write-Host "Starting main deployment." -ForegroundColor Green -Verbose
-#New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/deploy-01.json" -TemplateParameterFile "c:\LabFiles\parameters.json"
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri "https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/deploy-01.json" -TemplateParameterFile "c:\LabFiles\parameters.json"
 
 New-AzRoleAssignment -ResourceGroupName $resourceGroupName -ErrorAction Ignore -ObjectId "37548b2e-e5ab-4d2b-b0da-4d812f56c30e" -RoleDefinitionName "Owner"
 
