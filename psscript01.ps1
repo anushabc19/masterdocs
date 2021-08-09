@@ -61,11 +61,12 @@ Set-ItemProperty -Path $AutoLogonRegPath -Name "DefaultUsername" -Value "$($env:
 Set-ItemProperty -Path $AutoLogonRegPath -Name "DefaultPassword" -Value "Password.1!!" -type String
 Set-ItemProperty -Path $AutoLogonRegPath -Name "AutoLogonCount" -Value "1" -type DWord
 
-#$Trigger= New-ScheduledTaskTrigger -AtLogOn
-#@$User= "$($env:ComputerName)\demouser" 
-#$Action= New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\Powershell.exe" -Argument "-executionPolicy Unrestricted -File C:\Packages\logontask.ps1"
-#Register-ScheduledTask -TaskName "vscode-extensions" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
+# Scheduled Task
+$Trigger= New-ScheduledTaskTrigger -AtLogOn
+$User= "$($env:ComputerName)\demouser" 
+$Action= New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\Powershell.exe" -Argument "-executionPolicy Unrestricted -File C:\Packages\logontask.ps1"
+$Register-ScheduledTask -TaskName "vscode-extensions" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
 
 
-#Restart-Computer -Force 
+Restart-Computer -Force 
 Stop-Transcript
