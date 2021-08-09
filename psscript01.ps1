@@ -149,7 +149,7 @@ Set-ItemProperty -Path $AutoLogonRegPath -Name "AutoLogonCount" -Value "1" -type
 $Trigger= New-ScheduledTaskTrigger -AtLogOn
 $User= "$($env:ComputerName)\demouser" 
 $Action= New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\Powershell.exe" -Argument "-executionPolicy Unrestricted -File C:\Packages\logontask.ps1"
-Register-ScheduledTask -TaskName "vscode-extensions" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
+Register-ScheduledTask -TaskName "vscode-extensions1" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
 
 Write-Host "Restarting-Computer" 
 Restart-Computer -Force 
