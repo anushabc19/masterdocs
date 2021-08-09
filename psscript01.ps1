@@ -76,7 +76,7 @@ $WebClient = New-Object System.Net.WebClient
 $WebClient.DownloadFile("https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/scripts/extensions.bat","C:\Packages\extensions.bat")
 
 $WebClient = New-Object System.Net.WebClient
-$WebClient.DownloadFile("https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/scripts/logontask.ps1","C:\Packages\logontask.ps1")
+$WebClient.DownloadFile("https://raw.githubusercontent.com/anushabc/masterdocs/main/logontask.ps1","C:\Packages\logontask.ps1")
 
 New-Item -ItemType directory -Path "C:\Temp\IoT Edge"
 New-Item -ItemType directory -Path "C:\Temp\Azure Functions"
