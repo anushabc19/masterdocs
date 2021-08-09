@@ -73,7 +73,7 @@ choco install git
 
 #DownloadFiles
 $WebClient = New-Object System.Net.WebClient
-$WebClient.DownloadFile("https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/scripts/extensions.bat","C:\Packages\extensions.bat")
+$WebClient.DownloadFile("https://raw.githubusercontent.com/anushabc/masterdocs/main/extension.bat","C:\Packages\extensions.bat")
 
 $WebClient = New-Object System.Net.WebClient
 $WebClient.DownloadFile("https://raw.githubusercontent.com/anushabc/masterdocs/main/logontask.ps1","C:\Packages\logontask.ps1")
