@@ -36,14 +36,7 @@
         "no"
       ]
     },
-    "numWorkers": {
-      "defaultValue": 2,
-      "type": "Int"
-    },
-    "serverGroup": {
-      "defaultValue": "wwi-postgres",
-      "type": "string"
-    },
+  
     "azuserobjectid": {
       "type": "string"
     }
