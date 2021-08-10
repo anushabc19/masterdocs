@@ -34,22 +34,14 @@ WindowsServerCommon
 InstallCloudLabsShadow $ODLID $InstallCloudLabsShadow
 CreateCredFile $AzureUserName $AzurePassword $AzureTenantID $AzureSubscriptionID $DeploymentID $azuserobjectid
 InstallVSCode
-choco install azure-data-studio
-InstallPowerBIDesktop
+
 choco install dotnetcore-sdk
-choco install azure-functions-core-tools
-InstallAzCLI
-choco install powerbi -y -force
+
 sleep 10
 
-#Shortcut for Azure Data Studio
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Azure Studio.lnk")
-$Shortcut.TargetPath = """C:\Program Files\Azure Data Studio\azuredatastudio.exe"""
-$Shortcut.Save()
 
-#Assign Packages to Install
-choco install vscode
+
+
 choco install git
 
 #DownloadFiles
@@ -59,39 +51,11 @@ $WebClient.DownloadFile("https://experienceazure.blob.core.windows.net/templates
 $WebClient = New-Object System.Net.WebClient
 $WebClient.DownloadFile("https://experienceazure.blob.core.windows.net/templates/innovate-and-modernize-apps-with-data-and-ai/scripts/logontask.ps1","C:\Packages\logontask.ps1")
 
-New-Item -ItemType directory -Path "C:\Temp\IoT Edge"
-New-Item -ItemType directory -Path "C:\Temp\Azure Functions"
-
-$securePassword = $AzurePassword | ConvertTo-SecureString -AsPlainText -Force
-$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $AzureUsername, $securePassword
-
-function InstallAzPowerShellModule
-{
-  Install-PackageProvider NuGet -Force
-  Set-PSRepository PSGallery -InstallationPolicy Trusted
-  Install-Module Az -Repository PSGallery -Force -AllowClobber
-}
-InstallAzPowerShellModule
-
-#Install synapse modules
-Install-PackageProvider NuGet -Force
-Install-Module -Name Az.Synapse -RequiredVersion 0.3.0 -AllowClobber -Force
-
-sleep 5
-Import-Module Az.Synapse
-
-. C:\LabFiles\AzureCreds.ps1
-
-Connect-AzAccount -Credential $cred | Out-Null
 
 
 sleep 5
 
-#installing extensions to vscode
-code --install-extension ms-dotnettools.csharp 
-code --install-extension vsciot-vscode.azure-iot-tools
-code --install-extension ms-azuretools.vscode-azurefunctions
-choco install vscode-gitignore
+
 
 #Enable Autologon
 $AutoLogonRegPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
@@ -103,8 +67,8 @@ Set-ItemProperty -Path $AutoLogonRegPath -Name "AutoLogonCount" -Value "1" -type
 $Trigger= New-ScheduledTaskTrigger -AtLogOn
 $User= "$($env:ComputerName)\demouser" 
 $Action= New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\Powershell.exe" -Argument "-executionPolicy Unrestricted -File C:\Packages\logontask.ps1"
-Register-ScheduledTask -TaskName "vscode-extensions" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
+Register-ScheduledTask -TaskName "docker install" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force
 
-Write-Host "Restarting-Computer" 
+
 Stop-Transcript
 Restart-Computer -Force 
