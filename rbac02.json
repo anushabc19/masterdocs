@@ -1,0 +1,13 @@
+{
+    "Name":  "Spektra Custom RBAC",
+    "Id":  null,
+    "IsCustom":  true,
+    "Description":  "Spektra Training Custom Role.",
+    "Actions":  [
+                  "Microsoft.Web/sites/config/write",
+                  "Microsoft.Web/sites/config/list/action"
+                ],
+    "NotActions":  [
+                 "Microsoft.Authorization/*/read"
+                   ]
+}
