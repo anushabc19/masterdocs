@@ -15,5 +15,5 @@ azuredatastudio --install-extension azuredatastudio-postgresql-0.2.6-win-x64.vsi
 
 [Environment]::SetEnvironmentVariable("Path", $env:Path+";C:\Users\demouser\AppData\Roaming\npm\node_modules\azure-functions-core-tools\bin","User")
 
-Unregister-ScheduledTask -TaskName "vscode-extensions1" -Confirm:$false 
+Unregister-ScheduledTask -TaskName "SetUpVMs" -Confirm:$false 
 Restart-Computer -Force 
