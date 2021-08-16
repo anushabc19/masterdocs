@@ -15,6 +15,7 @@
     "Microsoft.Network/networkSecurityGroups/*",
     "Microsoft.Network/virtualNetworks/*",
     "Microsoft.Network/networkInterfaces/*",
+    "Microsoft.OperationalInsights/*",
     "Microsoft.ResourceHealth/availabilityStatuses/read",
     "Microsoft.Resources/deployments/*",
     "Microsoft.Resources/subscriptions/resourceGroups/read",
@@ -22,22 +23,18 @@
     "Microsoft.Storage/storageAccounts/listKeys/action",
     "Microsoft.ContainerService/containerServices/*",
     "Microsoft.ContainerRegistry/registries/*",
+    "Microsoft.DevTestLab/schedules/*",
     "Microsoft.ContainerService/managedClusters/*",
     "Microsoft.OperationalInsights/*",
     "Microsoft.DocumentDB/*",
     "Microsoft.ContainerService/managedClusters/listClusterUserCredential/action",
     "Microsoft.OperationsManagement/solutions/write",
     "Microsoft.OperationsManagement/managementAssociations/write",
-    "Microsoft.Resources/deployments/*",
     "Microsoft.DataMigration/sqlMigrationServices/write",
     "Microsoft.DataMigration/sqlMigrationServices/delete",
     "Microsoft.DataMigration/sqlMigrationServices/read",
     "Microsoft.DataMigration/sqlMigrationServices/listAuthKeys/action",
-    "Microsoft.DataMigration/sqlMigrationServices/regenerateAuthKeys/action",
-    "Microsoft.DataMigration/sqlMigrationServices/deleteNode/action",
-    "Microsoft.DataMigration/sqlMigrationServices/getMonitoringData/read",
     "Microsoft.DataMigration/sqlMigrationServices/listMigrations/read",
-    "Microsoft.DataMigration/sqlMigrationServices/MonitoringData/read",
     "Microsoft.Network/virtualNetworks/subnets/join/action",
     "Microsoft.Network/virtualNetworks/write",
     "Microsoft.Network/virtualNetworks/read",
@@ -45,7 +42,7 @@
     "Microsoft.Network/networkInterfaces/ipConfigurations/read"
   ],
   "NotActions": [
-      "Microsoft.Authorization/*/read"
+       "Microsoft.Authorization/*/read"
   ],
   "AssignableScopes": []
 }
