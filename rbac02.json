@@ -5,6 +5,7 @@
     "Description":  "Spektra Training Custom Role.",
     "Actions":  [
                   "Microsoft.Web/sites/config/write",
+                  "Microsoft.Web/sites/publish/Action",
                   "Microsoft.Web/sites/config/list/action"
                 ],
     "NotActions":  [
