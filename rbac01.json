@@ -4,14 +4,26 @@
     "IsCustom":  true,
     "Description":  "Spektra Training Custom Role.",
     "Actions":  [
-                    "microsoft.alertsmanagement/smartDetectorAlertRules/*",
-                    "Microsoft.DocumentDB/databaseAccounts/*",
-                    "microsoft.insights/actiongroups/*",
-                    "Microsoft.Insights/components/*",
-                    "Microsoft.Resources/deployments/*",
-                    "Microsoft.Resources/subscriptions/resourceGroups/read",
-                    "Microsoft.Web/serverFarms/*",
-                    "Microsoft.Web/sites/*"
+"Microsoft.Web/validate/action",
+"Microsoft.Web/sites/publishxml/action",
+"Microsoft.Web/sites/config/write",
+"Microsoft.Web/sites/config/list/action",
+"Microsoft.Web/serverfarms/write",
+"Microsoft.Web/sites/write",
+"Microsoft.Insights/components/write",
+"microsoft.alertsManagement/smartDetectorAlertRules/write",
+"Microsoft.Web/sites/restart/action",
+"Microsoft.Web/sites/start/action",
+"Microsoft.Web/sites/stop/action",
+"Microsoft.Web/sites/containerlogs/action",
+"Microsoft.Web/sites/publish/Action",
+"Microsoft.DocumentDB/databaseAccounts/listConnectionStrings/action",
+"Microsoft.DocumentDB/databaseAccounts/listKeys/action",
+"Microsoft.DocumentDB/databaseAccounts/readonlykeys/action",
+"Microsoft.DocumentDB/databaseAccounts/write",
+"Microsoft.DocumentDB/databaseAccounts/backup/action",
+"Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections/write"
+
                 ],
     "NotActions":  [
                  "Microsoft.Authorization/*/read"
