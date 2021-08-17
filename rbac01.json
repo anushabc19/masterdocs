@@ -22,7 +22,10 @@
     "Microsoft.DocumentDB/databaseAccounts/readonlykeys/action",
     "Microsoft.DocumentDB/databaseAccounts/write",
     "Microsoft.DocumentDB/databaseAccounts/backup/action",
-    "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections/write"
+    "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections/write",
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.Resources/deployments/validate/action",
+    "Microsoft.Resources/subscriptions/resourceGroups/read"
   ],
   "NotActions": [
     "Microsoft.Authorization/*/read"
