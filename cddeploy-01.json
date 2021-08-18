@@ -236,6 +236,10 @@
     "LABVM DNS Name": {
       "type": "String",
       "value": "[concat(variables('vmPublicIpDnsName'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
+    },
+    "Deployment ID": {
+      "type": "String",
+      "value": "[parameters('DeploymentID')]"
     }
   }
 }
