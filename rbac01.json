@@ -4,6 +4,9 @@
   "IsCustom": true,
   "Description": "Spektra Training Custom Role.",
   "Actions": [
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.Resources/deployments/validate/action",
+    "Microsoft.Resources/subscriptions/resourceGroups/read"
     "Microsoft.Web/validate/action",
     "Microsoft.Web/sites/publishxml/action",
     "Microsoft.Web/sites/config/write",
@@ -23,10 +26,7 @@
     "Microsoft.DocumentDB/databaseAccounts/write",
     "Microsoft.DocumentDB/databaseAccounts/backup/action",
     "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections/write",
-    "Microsoft.DocumentDB/databaseAccounts/*,
-    "Microsoft.Resources/deployments/*",
-    "Microsoft.Resources/deployments/validate/action",
-    "Microsoft.Resources/subscriptions/resourceGroups/read"
+    "Microsoft.DocumentDB/databaseAccounts/*
   ],
   "NotActions": [
     "Microsoft.Authorization/*/read"
