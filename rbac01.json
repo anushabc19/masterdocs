@@ -23,6 +23,7 @@
     "Microsoft.DocumentDB/databaseAccounts/write",
     "Microsoft.DocumentDB/databaseAccounts/backup/action",
     "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections/write",
+    "Microsoft.DocumentDB/databaseAccounts/*,
     "Microsoft.Resources/deployments/*",
     "Microsoft.Resources/deployments/validate/action",
     "Microsoft.Resources/subscriptions/resourceGroups/read"
