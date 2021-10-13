@@ -101,7 +101,11 @@
     "Microsoft.Network/virtualNetworks/join/action",
     "Microsoft.Network/networkWatchers/read",
     "Microsoft.Network/networkWatchers/write",
-    "Microsoft.AlertsManagement/alertsList/read"
+    "Microsoft.AlertsManagement/alertsList/read",
+    "Microsoft.Insights/alertRules/*",
+    "Microsoft.ResourceHealth/availabilityStatuses/read",
+     "Microsoft.Resources/subscriptions/resourceGroups/read",
+     "Microsoft.Support/*"
 
   ],
   "NotActions": [
