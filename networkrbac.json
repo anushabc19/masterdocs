@@ -105,7 +105,9 @@
     "Microsoft.Insights/*",
     "Microsoft.ResourceHealth/availabilityStatuses/read",
      "Microsoft.Resources/subscriptions/resourceGroups/read",
-     "Microsoft.Support/*"
+     "Microsoft.Support/*",
+     "Microsoft.Network/networkWatchers/connectionMonitors/providers/Microsoft.Insights/metricDefinitions/read",
+    "Microsoft.Network/virtualRouters/peerings/*"
 
   ],
   "NotActions": [
