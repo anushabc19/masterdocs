@@ -102,8 +102,7 @@
     "Microsoft.Network/networkWatchers/read",
     "Microsoft.Network/networkWatchers/write",
     "Microsoft.AlertsManagement/alertsList/read",
-    "Microsoft.Network/*",
-    "Microsoft.Insights/alertRules/*",
+    "Microsoft.Insights/*",
     "Microsoft.ResourceHealth/availabilityStatuses/read",
      "Microsoft.Resources/subscriptions/resourceGroups/read",
      "Microsoft.Support/*"
