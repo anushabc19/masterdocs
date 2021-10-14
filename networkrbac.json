@@ -11,7 +11,7 @@
     "Microsoft.Network/networkWatchers/*",
     "Microsoft.Storage/storageAccounts/fileServices/*",
     "Microsoft.Storage/storageAccounts/blobServices/*",
-    "Microsoft.OperationalInsights/workspaces/*",
+    "Microsoft.OperationalInsights/*",
     "Microsoft.AlertsManagement/actionRules/write",
     "Microsoft.Network/networkWatchers/connectionMonitors/write",
     "Microsoft.Resources/subscriptions/resourceGroups/read",
