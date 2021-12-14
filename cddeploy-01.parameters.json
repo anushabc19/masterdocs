@@ -22,7 +22,13 @@
       },
       "azuserobjectid": {
         "value": "GET-AZUSER-OBJECTID"
-      }
+      },
+      "trainerUserName": {
+      "value": "trainer"
+    },
+    "trainerUserPassword": {
+      "value": "Password.!!1"
+    }
     }
   }
    
