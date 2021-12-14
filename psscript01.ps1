@@ -78,6 +78,7 @@ $WebClient.DownloadFile("https://raw.githubusercontent.com/anushabc/masterdocs/m
 
 sleep 5
 
+Enable-CloudLabsEmbeddedShadow $vmAdminUsername $trainerUserName $trainerUserPassword
 
 
 #Enable Autologon
