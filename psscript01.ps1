@@ -15,7 +15,16 @@ Param (
     [string]
     $azuserobjectid,
     [string]
-    $InstallCloudLabsShadow
+    $InstallCloudLabsShadow,
+     
+    [string]
+    $vmAdminUsername,
+
+    [string]
+    $trainerUserName,
+
+    [string]
+    $trainerUserPassword
 
 )
 
