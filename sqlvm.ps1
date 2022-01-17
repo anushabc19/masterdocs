@@ -68,6 +68,36 @@ function Add-SqlFirewallRule {
 
 Add-SqlFirewallRule
 $SqlPass="Password.1!!"
+
+# Download the database backup file from the GitHub repo
+Invoke-WebRequest 'https://raw.githubusercontent.com/microsoft/MCW-Migrating-SQL-databases-to-Azure/master/Hands-on%20lab/lab-files/Database/WideWorldImporters.bak' -OutFile 'C:\WideWorldImporters.bak'
+
+Add-PSSnapin SqlServerProviderSnapin100 -ErrorAction SilentlyContinue
+Add-PSSnapin SqlServerCmdletSnapin100 -ErrorAction SilentlyContinue
+
+# Define database variables
+$ServerName = $env:ComputerName
+$DatabaseName = 'WideWorldImporters'
+$SqlMiUser = 'sqlmiuser'
+$PasswordPlainText = 'Password.1234567890'
+$PasswordSecure = ConvertTo-SecureString $PasswordPlainText -AsPlainText -Force
+$PasswordSecure.MakeReadOnly()
+$Creds = New-Object System.Management.Automation.PSCredential $SqlMiUser, $PasswordSecure
+$Password = $Creds.GetNetworkCredential().Password
+
+# Restore the WideWorldImporters database using the downloaded backup file
+function Restore-SqlDatabase {
+    $bakFileName = 'C:\' + $DatabaseName +'.bak'
+
+    $RestoreCmd = "USE [master];
+                   GO
+                   RESTORE DATABASE [$DatabaseName] FROM DISK ='$bakFileName' WITH REPLACE;
+                   GO"
+
+    Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+    Start-Sleep -Seconds 30
+}
+
 # Download and install Data Mirgation Assistant
 (New-Object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/C/6/3/C63D8695-CEF2-43C3-AF0A-4989507E429B/DataMigrationAssistant.msi', 'C:\DataMigrationAssistant.msi')
 Start-Process -file 'C:\DataMigrationAssistant.msi' -arg '/qn /l*v C:\dma_install.txt' -passthru | wait-process
