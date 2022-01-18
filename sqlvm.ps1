@@ -15,7 +15,14 @@ function Disable-InternetExplorerESC {
 Disable-InternetExplorerESC
 
 # Download the database backup file from the GitHub repo
-Invoke-WebRequest 'https://raw.githubusercontent.com/microsoft/MCW-Migrating-SQL-databases-to-Azure/master/Hands-on%20lab/lab-files/Database/WideWorldImporters.bak' -OutFile 'C:\WideWorldImporters.bak'
+Invoke-WebRequest 'https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2017.bak' -OutFile 'C:\AdventureWorks2017.bak'
+
+# Download the database backup file from the GitHub repo
+Invoke-WebRequest 'https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak' -OutFile 'C:\WideWorldImporters-Full.bak'
+
+# Download the database backup file from the GitHub repo
+Invoke-WebRequest 'https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImportersDW-Full.bak' -OutFile 'C:\WideWorldImportersDW-Full.bak'
+
 
 # Download and install Data Mirgation Assistant
 # Invoke-WebRequest 'https://download.microsoft.com/download/C/6/3/C63D8695-CEF2-43C3-AF0A-4989507E429B/DataMigrationAssistant.msi' -OutFile 'C:\DataMigrationAssistant.msi'
@@ -30,7 +37,7 @@ Add-PSSnapin SqlServerCmdletSnapin100 -ErrorAction SilentlyContinue
 
 # Define database variables
 $ServerName = $env:ComputerName
-$DatabaseName = 'WideWorldImporters'
+#$DatabaseName = 'WideWorldImporters'
 $SqlMiUser = 'sqlmiuser'
 $PasswordPlainText = 'Password.1234567890'
 $PasswordSecure = ConvertTo-SecureString $PasswordPlainText -AsPlainText -Force
@@ -77,10 +84,7 @@ function Restore-SqlDatabase1 {
     MOVE N'AdventureWorks2017'
     TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017.mdf',
     MOVE N'AdventureWorks2017_log'
-    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\AdventureWorks2017_log.ldf'
-
-	    
-"
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\AdventureWorks2017_log.ldf'"
 
     Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
     Start-Sleep -Seconds 30
@@ -101,7 +105,7 @@ function Restore-SqlDatabase2 {
     MOVE N'WWI_Log'
     TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_log.ldf',
     MOVE N'WWI_InMemory_Data_1'
-   TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_InMemory_Data_1'
+   TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_InMemory_Data_1'
     "
 
     Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
@@ -120,7 +124,10 @@ function Restore-SqlDatabase3 {
 	MOVE N'WWI_UserData'
 	TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_UserData.ndf',
     MOVE N'WWI_Log'
-    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_log.ldf'"
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_log.ldf',
+    MOVE N'WWI_InMemory_Data_1'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_InMemory_Data_1'
+    "
 
     Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
     Start-Sleep -Seconds 30
