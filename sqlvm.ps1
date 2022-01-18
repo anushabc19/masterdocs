@@ -46,17 +46,7 @@ $Creds = New-Object System.Management.Automation.PSCredential $SqlMiUser, $Passw
 $Password = $Creds.GetNetworkCredential().Password
 
 # Restore the WideWorldImporters database using the downloaded backup file
-function Restore-SqlDatabase {
-    $bakFileName = 'C:\' + $DatabaseName +'.bak'
 
-    $RestoreCmd = "USE [master];
-                   GO
-                   RESTORE DATABASE [$DatabaseName] FROM DISK ='$bakFileName' WITH REPLACE;
-                   GO"
-
-    Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
-    Start-Sleep -Seconds 30
-}
 
 function Enable-ServiceBroker {
     $SetBrokerCmd = "USE [$DatabaseName];
@@ -78,7 +68,7 @@ function Restore-SqlDatabase1 {
 
  RESTORE DATABASE [AdventureWorks2017]
   FILE = N'AdventureWorks2017'
-  FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\AdventureWorks2017.bak'
+  FROM DISK = N'C:\AdventureWorks2017.bak'
   WITH 
     FILE = 1, NOUNLOAD, STATS = 10,
     MOVE N'AdventureWorks2017'
@@ -91,11 +81,11 @@ function Restore-SqlDatabase1 {
 }
 
 function Restore-SqlDatabase2 {
-    $bakFileName = 'C:\WideWorldImporters-Standard.bak'
+    $bakFileName = 'C:\WideWorldImporters-Full.bak'
 
     $RestoreCmd = "RESTORE DATABASE [WideWorldImporters(OLTP)]
  
-  FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\WideWorldImporters-Standard.bak'
+  FROM DISK = N'C:\WideWorldImporters-Full.bak'
   WITH 
     FILE = 1, 
     MOVE N'WWI_Primary'
@@ -116,7 +106,7 @@ function Restore-SqlDatabase3 {
     $bakFileName = 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\WideWorldImporters-Standard.bak'
 
     $RestoreCmd = "RESTORE DATABASE [WideWorldImporters(DW)]
- FROM DISK = N'C:\WideWorldImportersDW-Standard.bak'
+ FROM DISK = N'C:\WideWorldImportersDW-Full.bak'
   WITH 
     FILE = 1, 
     MOVE N'WWI_Primary'
@@ -125,7 +115,7 @@ function Restore-SqlDatabase3 {
 	TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_UserData.ndf',
     MOVE N'WWI_Log'
     TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_log.ldf',
-    MOVE N'WWI_InMemory_Data_1'
+    MOVE N'WWIDW_InMemory_Data_1'
     TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_InMemory_Data_1'
     "
 
@@ -154,5 +144,4 @@ Start-Service -Name 'MSSQLSERVER'
 
 # Enable the Service Broker functionality on the database
 Enable-ServiceBroker
-
 
