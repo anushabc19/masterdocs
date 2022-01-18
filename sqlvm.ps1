@@ -48,17 +48,7 @@ $Password = $Creds.GetNetworkCredential().Password
 # Restore the WideWorldImporters database using the downloaded backup file
 
 
-function Enable-ServiceBroker {
-    $SetBrokerCmd = "USE [$DatabaseName];
-                     GO
-                     GRANT ALTER ON DATABASE:: $DatabaseName TO $SqlMiUser;
-                     GO
-                     ALTER DATABASE [$DatabaseName]
-                     SET ENABLE_BROKER WITH ROLLBACK IMMEDIATE;
-                     GO"
 
-    Invoke-SqlCmd -Query $SetBrokerCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
-}
 
 # Restore the WideWorldImporters database using the downloaded backup file
 function Restore-SqlDatabase1 {
@@ -66,7 +56,7 @@ function Restore-SqlDatabase1 {
 
     $RestoreCmd = "
 
- RESTORE DATABASE [AdventureWorks2017]
+  RESTORE DATABASE [AdventureWorks2017]
   FILE = N'AdventureWorks2017'
   FROM DISK = N'C:\AdventureWorks2017.bak'
   WITH 
