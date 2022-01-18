@@ -63,37 +63,80 @@ function Enable-ServiceBroker {
     Invoke-SqlCmd -Query $SetBrokerCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
 }
 
-function Config-SqlDatabaseLogin {
-    $UserName = 'WorkshopUser'
+# Restore the WideWorldImporters database using the downloaded backup file
+function Restore-SqlDatabase1 {
+    $bakFileName = 'C:\AdventureWorks2017.bak'
 
-    $CreateLoginCmd = "USE [master];
-                       GO
-                       CREATE LOGIN $UserName WITH PASSWORD = N'$Password';
-                       GO"
+    $RestoreCmd = "
 
-    Invoke-SqlCmd -Query $CreateLoginCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+ RESTORE DATABASE [AdventureWorks2017]
+  FILE = N'AdventureWorks2017'
+  FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\AdventureWorks2017.bak'
+  WITH 
+    FILE = 1, NOUNLOAD, STATS = 10,
+    MOVE N'AdventureWorks2017'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017.mdf',
+    MOVE N'AdventureWorks2017_log'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\AdventureWorks2017_log.ldf'
 
-    $AddRoleCmd = "USE [master];
-                   GO
-                   EXEC sp_addsrvrolemember @loginame = N'$UserName', @rolename = N'sysadmin';
-                   GO"
+	    
+"
 
-    Invoke-SqlCmd -Query $AddRoleCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
-
-    $AssignUserCmd = "USE [$DatabaseName];
-                      GO
-                      IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = '$UserName')
-                        BEGIN
-                            CREATE USER [$UserName] FOR LOGIN [$UserName]
-                            EXEC sp_addrolemember N'db_datareader', N'$UserName'
-                        END;
-                      GO"
-
-    Invoke-SqlCmd -Query $AssignUserCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+    Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+    Start-Sleep -Seconds 30
 }
 
-# Restore the datasbase
-Restore-SqlDatabase
+function Restore-SqlDatabase2 {
+    $bakFileName = 'C:\WideWorldImporters-Standard.bak'
+
+    $RestoreCmd = "RESTORE DATABASE [WideWorldImporters(OLTP)]
+ 
+  FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\WideWorldImporters-Standard.bak'
+  WITH 
+    FILE = 1, 
+    MOVE N'WWI_Primary'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\WideWorldImporters.mdf',
+	MOVE N'WWI_UserData'
+	TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_UserData.ndf',
+    MOVE N'WWI_Log'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_log.ldf'"
+
+    Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+    Start-Sleep -Seconds 30
+}
+
+function Restore-SqlDatabase3 {
+    $bakFileName = 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Backup\WideWorldImporters-Standard.bak'
+
+    $RestoreCmd = "RESTORE DATABASE [WideWorldImporters(DW)]
+ FROM DISK = N'C:\WideWorldImportersDW-Standard.bak'
+  WITH 
+    FILE = 1, 
+    MOVE N'WWI_Primary'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\WideWorldImportersDW.mdf',
+	MOVE N'WWI_UserData'
+	TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_UserData.ndf',
+    MOVE N'WWI_Log'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_log.ldf'"
+
+    Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
+    Start-Sleep -Seconds 30
+}
+
+# Restore the Adventuerworks datasbase
+Restore-SqlDatabase1
+
+Start-Sleep -Seconds 30
+
+# Restore the WideWorldImporters (OLTP)  datasbase
+Restore-SqlDatabase2
+
+Start-Sleep -Seconds 30
+
+# Restore the WideWorldImporters (DW)  datasbase
+Restore-SqlDatabase3
+
+Start-Sleep -Seconds 30
 
 # Restart the MSSQLSERVER service.
 Stop-Service -Name 'MSSQLSERVER' -Force
@@ -102,5 +145,4 @@ Start-Service -Name 'MSSQLSERVER'
 # Enable the Service Broker functionality on the database
 Enable-ServiceBroker
 
-# Create the WorkshopUser user
-Config-SqlDatabaseLogin
+
