@@ -96,10 +96,13 @@ function Restore-SqlDatabase2 {
     FILE = 1, 
     MOVE N'WWI_Primary'
     TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\WideWorldImporters.mdf',
-	MOVE N'WWI_UserData'
-	TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_UserData.ndf',
+    MOVE N'WWI_UserData'
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_UserData.ndf',
     MOVE N'WWI_Log'
-    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_log.ldf'"
+    TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImporters_log.ldf',
+    MOVE N'WWI_InMemory_Data_1'
+   TO N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Log\WideWorldImportersDW_InMemory_Data_1'
+    "
 
     Invoke-SqlCmd -Query $RestoreCmd -QueryTimeout 3600 -Username $SqlMiUser -Password $Password -ServerInstance $ServerName
     Start-Sleep -Seconds 30
