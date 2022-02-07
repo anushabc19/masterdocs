@@ -1,1 +1,13 @@
 
+[
+    {
+      "Name": "ai",
+      "Language": "English",
+      "Files": [
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/anushabc/ai-in-a-day/main/03-knowledge-mining/README.md",
+          "Order": 1
+        }
+      ]
+    }
+  ]
