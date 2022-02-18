@@ -23,9 +23,9 @@
                 ],
     "NotActions":  [
         	
-0	"Microsoft.Databricks/workspaces/delete"
-1	"Microsoft.Synapse/workspaces/delete"
-2	"Microsoft.Storage/storageAccounts/delete"
+0	"Microsoft.Databricks/workspaces/delete",
+1	"Microsoft.Synapse/workspaces/delete",
+2	"Microsoft.Storage/storageAccounts/delete",
 3	"Microsoft.Resources/deployments/delete"
 
                    ]
