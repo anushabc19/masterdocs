@@ -5,7 +5,7 @@
     "IsCustom":  true,
     "Description":  "Spektra Training Custom Role.",
     "Actions":  [
-                    "microsoft.alertsmanagement/smartDetectorAlertRules/*",
+                    
                     "Microsoft.Authorization/*/read",
                     "Microsoft.CognitiveServices/accounts/*",
                     "microsoft.insights/actiongroups/*",
@@ -22,6 +22,11 @@
                     "Microsoft.Synapse/workspaces/sqlPools/*"
                 ],
     "NotActions":  [
+        	
+0	"Microsoft.Databricks/workspaces/delete"
+1	"Microsoft.Synapse/workspaces/delete"
+2	"Microsoft.Storage/storageAccounts/delete"
+3	"Microsoft.Resources/deployments/delete"
 
                    ]
 }
