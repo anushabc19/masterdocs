@@ -9,17 +9,17 @@
                     "Microsoft.Authorization/*/read",
                     "Microsoft.CognitiveServices/accounts/*",
                     "microsoft.insights/actiongroups/*",
+                    "Microsoft.Authorization/roleAssignments/write",
                     "Microsoft.Insights/components/*",
-                    "Microsoft.KeyVault/vaults/*",
+                    "Microsoft.KeyVault/*",
                     "Microsoft.MachineLearningServices/workspaces/*",
                     "Microsoft.Purview/accounts/*",
                     "Microsoft.Resources/deployments/*",
                     "Microsoft.Resources/subscriptions/resourceGroups/read",
+                    "Microsoft.Resources/deployments/validate/action",
                     "Microsoft.Storage/storageAccounts/*",
-                    "Microsoft.Synapse/workspaces/*",
-                    "Microsoft.Synapse/workspaces/bigDataPools/*",
-                    "Microsoft.Synapse/workspaces/kustoPools/*",
-                    "Microsoft.Synapse/workspaces/sqlPools/*"
+                    "Microsoft.Synapse/workspaces/*"
+              
                 ],
     "NotActions":  [
         	
